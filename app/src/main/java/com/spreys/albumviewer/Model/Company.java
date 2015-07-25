@@ -12,4 +12,20 @@ public class Company {
     private String name;
     private String catchPhrase;
     private String bs;
+
+    public Company (String jsonString) {
+
+    }
+
+    public String getName() {
+        return null;
+    }
+
+    public String getCatchPhrase() {
+        return null;
+    }
+
+    public String getBs() {
+        return null;
+    }
 }
