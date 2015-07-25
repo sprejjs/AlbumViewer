@@ -10,8 +10,6 @@ import com.spreys.albumviewer.Model.User;
 
 import junit.framework.Assert;
 
-import java.net.URL;
-
 /**
  * Created with Android Studio
  *
@@ -31,16 +29,14 @@ public class TestObjectCreation extends AndroidTestCase {
                 "}";
 
         Album album = new Album(jsonString);
-        assertEquals(album.getId(), 5);
-        assertEquals(album.getTitle(), "test title");
-        assertEquals(album.getUserId(), 4);
+        assertEquals(5, album.getId());
+        assertEquals("test title", album.getTitle());
+        assertEquals(4, album.getUserId());
     }
 
     public void testCreateAlbum_NullArgument() {
-        String jsonString = null;
-
         try {
-            new Album(jsonString);
+            new Album((String) null);
             Assert.fail("Application did not throw illegal pointer exception");
         } catch (IllegalArgumentException ex) {
             //Success
@@ -79,13 +75,13 @@ public class TestObjectCreation extends AndroidTestCase {
                 "}";
 
         Photo photo = new Photo(jsonString);
-        assertEquals(photo.getAlbumId(), 2);
-        assertEquals(photo.getId(), 6);
-        assertEquals(photo.getTitle(), "random title");
+        assertEquals(2, photo.getAlbumId());
+        assertEquals(6, photo.getId());
+        assertEquals("random title", photo.getTitle());
 
         try {
-            assertEquals(photo.getUrl(), new URL("http://placehold.it/600/92c952"));
-            assertEquals(photo.getThumbnailUrl(), new URL("http://placehold.it/150/30ac17"));
+            assertEquals("http://placehold.it/600/92c952", photo.getUrl());
+            assertEquals("http://placehold.it/150/30ac17", photo.getThumbnailUrl());
         } catch (Exception ex) {
             Assert.fail("Exception received");
         }
@@ -93,7 +89,7 @@ public class TestObjectCreation extends AndroidTestCase {
 
     public void testCreatePhoto_NullArgument() {
         try {
-            new Photo(null);
+            new Photo((String) null);
             Assert.fail("Application did not throw illegal argument exception");
         } catch (IllegalArgumentException ex) {
             //Success
@@ -128,14 +124,14 @@ public class TestObjectCreation extends AndroidTestCase {
                 "  }";
 
         Company company = new Company(jsonString);
-        assertEquals(company.getName(), "Romaguera-Crona");
-        assertEquals(company.getCatchPhrase(), "Whatever Forever");
-        assertEquals(company.getBs(), "harness real-time e-markets");
+        assertEquals("Romaguera-Crona", company.getName());
+        assertEquals("Whatever Forever", company.getCatchPhrase());
+        assertEquals("harness real-time e-markets", company.getBs());
     }
 
     public void testCreateCompany_NullArgument() {
         try {
-            new Company(null);
+            new Company((String) null);
             Assert.fail("Illegal argument exception not throwned");
         } catch (IllegalArgumentException exception) {
             //Success
@@ -175,17 +171,17 @@ public class TestObjectCreation extends AndroidTestCase {
                 "  }";
 
         Address address = new Address(jsonString);
-        assertEquals(address.getStreet(), "Kulas Light");
-        assertEquals(address.getSuite(), "Apt. 556");
-        assertEquals(address.getCity(), "Gwenborough");
-        assertEquals(address.getZipCode(), "92998-3874");
-        assertEquals(address.getLatitude(), "-37.3159");
-        assertEquals(address.getLongitude(), "81.1496");
+        assertEquals("Kulas Light", address.getStreet());
+        assertEquals("Apt. 556", address.getSuite());
+        assertEquals("Gwenborough", address.getCity());
+        assertEquals("92998-3874", address.getZipCode());
+        assertEquals("-37.3159", address.getLatitude());
+        assertEquals("81.1496", address.getLongitude());
     }
 
     public void testCreateAddress_NullPointer() {
         try {
-            new Address(null);
+            new Address((String) null);
             Assert.fail("Illegal argument exception not throwned");
         } catch (IllegalArgumentException exception) {
             //Success
@@ -237,17 +233,17 @@ public class TestObjectCreation extends AndroidTestCase {
                 "}";
 
         User user = new User(jsonString);
-        assertEquals(user.getId(), 1);
-        assertEquals(user.getName(), "Leanne Graham");
-        assertEquals(user.getUsername(), "Bret");
-        assertEquals(user.getEmail(), "Sincere@april.biz");
-        assertEquals(user.getPhone(), "1-770-736-8031 x56442");
-        assertEquals(user.getWebsite(), "hildegard.org");
+        assertEquals(1, user.getId());
+        assertEquals("Leanne Graham", user.getName());
+        assertEquals("Bret", user.getUsername());
+        assertEquals("Sincere@april.biz", user.getEmail());
+        assertEquals("1-770-736-8031 x56442", user.getPhone());
+        assertEquals("hildegard.org", user.getWebsite());
     }
 
     public void testCreateUser_NullPointer() {
         try {
-            new User(null);
+            new User((String) null);
             Assert.fail("Illegal argument exception not throwned");
         } catch (IllegalArgumentException exception) {
             //Success

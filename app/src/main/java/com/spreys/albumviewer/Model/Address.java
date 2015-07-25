@@ -1,5 +1,8 @@
 package com.spreys.albumviewer.Model;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created with Android Studio
  *
@@ -17,30 +20,54 @@ public class Address {
     private String longitude;
 
     public Address (String jsonString) {
+        try {
+            initialiseObject(new JSONObject(jsonString));
+        } catch (JSONException | NullPointerException e) {
+            throw new IllegalArgumentException("Unable to parse JSON object");
+        }
+    }
 
+    public Address (JSONObject jAddress) {
+        initialiseObject(jAddress);
+    }
+
+    private void initialiseObject(JSONObject object){
+        try {
+            this.street = object.getString("street");
+            this.suite = object.getString("suite");
+            this.city = object.getString("city");
+            this.zipCode = object.getString("zipcode");
+
+            //Parse geo
+            JSONObject geoObject = object.getJSONObject("geo");
+            this.latitude = geoObject.getString("lat");
+            this.longitude = geoObject.getString("lng");
+        } catch (Exception ex) {
+            throw new IllegalArgumentException("Unable to parse JSON object");
+        }
     }
 
     public String getStreet(){
-        return null;
+        return street;
     }
 
     public String getSuite(){
-        return null;
+        return suite;
     }
 
     public String getCity() {
-        return null;
+        return city;
     }
 
     public String getZipCode() {
-        return null;
+        return zipCode;
     }
 
     public String getLatitude() {
-        return null;
+        return latitude;
     }
 
     public String getLongitude() {
-        return null;
+        return longitude;
     }
 }

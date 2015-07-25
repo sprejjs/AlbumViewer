@@ -23,9 +23,9 @@ public class TestNetworkingCalls extends AndroidTestCase {
         ApiWrapper apiWrapper = new ApiWrapper();
         Album album = apiWrapper.getAlbum(2);
 
-        assertEquals(album.getId(), 2);
-        assertEquals(album.getUserId(), 1);
-        assertEquals(album.getTitle(), "sunt qui excepturi placeat culpa");
+        assertEquals(2, album.getId());
+        assertEquals(1, album.getUserId());
+        assertEquals("sunt qui excepturi placeat culpa", album.getTitle());
     }
 
     public void test_getAlbums() {
@@ -38,11 +38,11 @@ public class TestNetworkingCalls extends AndroidTestCase {
         ApiWrapper apiWrapper = new ApiWrapper();
         User user = apiWrapper.getUser(3);
 
-        assertEquals(user.getName(), "Clementine Bauch");
-        assertEquals(user.getId(), 3);
-        assertEquals(user.getEmail(), "Nathan@yesenia.net");
-        assertEquals(user.getPhone(), "1-463-123-4447");
-        assertEquals(user.getWebsite(), "ramiro.info");
+        assertEquals("Clementine Bauch", user.getName());
+        assertEquals(3, user.getId());
+        assertEquals("Nathan@yesenia.net", user.getEmail());
+        assertEquals("1-463-123-4447", user.getPhone());
+        assertEquals("ramiro.info", user.getWebsite());
     }
 
     public void test_getUsers() {
@@ -56,11 +56,11 @@ public class TestNetworkingCalls extends AndroidTestCase {
         ApiWrapper apiWrapper = new ApiWrapper();
         Photo photo = apiWrapper.getPhoto(6);
 
-        assertEquals(photo.getAlbumId(), 1);
-        assertEquals(photo.getId(), 6);
-        assertEquals(photo.getTitle(), "accusamus ea aliquid et amet sequi nemo");
-        assertEquals(photo.getUrl(), "http://placehold.it/600/56a8c2");
-        assertEquals(photo.getThumbnailUrl(), "http://placehold.it/150/c672a0");
+        assertEquals(1, photo.getAlbumId());
+        assertEquals(6, photo.getId());
+        assertEquals("accusamus ea aliquid et amet sequi nemo", photo.getTitle());
+        assertEquals("http://placehold.it/600/56a8c2", photo.getUrl());
+        assertEquals("http://placehold.it/150/c672a0", photo.getThumbnailUrl());
     }
 
     public void test_getPhotos() {

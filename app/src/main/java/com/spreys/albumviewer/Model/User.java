@@ -1,5 +1,8 @@
 package com.spreys.albumviewer.Model;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created with Android Studio
  *
@@ -19,38 +22,67 @@ public class User {
     private Company company;
 
     public User (String jsonString) {
+        try {
+            initialiseObject(new JSONObject(jsonString));
+        } catch (JSONException | NullPointerException exception) {
+            throw new IllegalArgumentException("Unable to parse json string");
+        }
 
+    }
+
+    public User (JSONObject jUser) {
+        initialiseObject(jUser);
+    }
+
+    private void initialiseObject(JSONObject jObject) {
+        try {
+            //Parse parameters
+            this.id = jObject.getInt("id");
+            this.name = jObject.getString("name");
+            this.username = jObject.getString("username");
+            this.email = jObject.getString("email");
+            this.phone = jObject.getString("phone");
+            this.website = jObject.getString("website");
+
+            //Parse Address
+            this.address = new Address(jObject.getJSONObject("address"));
+
+            //Parse Company
+            this.company = new Company(jObject.getJSONObject("company"));
+        } catch (JSONException e) {
+            throw new IllegalArgumentException("Unable to convert received parameter to JSONobject");
+        }
     }
 
     public int getId() {
-        return -1;
+        return id;
     }
 
     public String getName() {
-        return null;
+        return name;
     }
 
     public String getUsername() {
-        return null;
+        return username;
     }
 
     public String getEmail() {
-        return null;
+        return email;
     }
 
     public Address getAddress() {
-        return null;
+        return address;
     }
 
     public String getPhone() {
-        return null;
+        return phone;
     }
 
     public String getWebsite() {
-        return null;
+        return website;
     }
 
     public Company getCompany() {
-        return null;
+        return company;
     }
 }
