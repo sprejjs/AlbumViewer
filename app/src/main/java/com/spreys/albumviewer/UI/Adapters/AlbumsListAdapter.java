@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.spreys.albumviewer.Model.Album;
@@ -33,14 +34,21 @@ public class AlbumsListAdapter extends ArrayAdapter<Album> {
         //Inflate view if required
         if(convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.album_list_item, parent, false);
+
+            ViewHolder viewHolder = new ViewHolder();
+            viewHolder.item_title = ((TextView) convertView.findViewById(R.id.album_list_item_title));
+            viewHolder.item_username = ((TextView) convertView.findViewById(R.id.album_list_item_username));
+
+            convertView.setTag(viewHolder);
         }
 
-        //Fill up the date
-        //TODO use view holder design pattern
+        ViewHolder viewHolder = (ViewHolder)convertView.getTag();
+
+        //Fill up the data
         Album album = mAlbums.get(position);
-        ((TextView) convertView.findViewById(R.id.album_list_item_title)).setText(album.getTitle());
+        viewHolder.item_title.setText(album.getTitle());
         //TODO replace id with a username
-        ((TextView) convertView.findViewById(R.id.album_list_item_username)).setText(String.valueOf(album.getId()));
+        viewHolder.item_username.setText(String.valueOf(album.getId()));
 
         return convertView;
     }
@@ -48,5 +56,10 @@ public class AlbumsListAdapter extends ArrayAdapter<Album> {
     @Override
     public int getCount() {
         return mAlbums.size();
+    }
+
+    static class ViewHolder {
+        TextView item_title;
+        TextView item_username;
     }
 }

@@ -35,14 +35,18 @@ public class ThumbnailsAdapter extends ArrayAdapter<Photo> {
     public View getView(int position, View convertView, ViewGroup parent) {
         if(convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.thumbnail_item, parent, false);
+
+            ViewHolder viewHolder = new ViewHolder();
+            viewHolder.imageView = (ImageView)convertView.findViewById(R.id.thumbnails_item_image_view);
+
+            convertView.setTag(viewHolder);
         }
 
-        //TODO apply view holder design patter
-        ImageView imageView = (ImageView)convertView.findViewById(R.id.thumbnails_item_image_view);
+        ViewHolder viewHolder = (ViewHolder)convertView.getTag();
 
         //Download a new image with Glide
         Glide.with(getContext()).load(mPhotos.get(position).getThumbnailUrl())
-                .placeholder(R.drawable.loading).into(imageView);
+                .placeholder(R.drawable.loading).into(viewHolder.imageView);
         return convertView;
     }
 
@@ -50,4 +54,9 @@ public class ThumbnailsAdapter extends ArrayAdapter<Photo> {
     public int getCount() {
         return mPhotos.size();
     }
+
+    static class ViewHolder {
+        ImageView imageView;
+    }
+
 }
