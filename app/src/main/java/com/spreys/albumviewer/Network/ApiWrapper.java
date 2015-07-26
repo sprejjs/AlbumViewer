@@ -26,13 +26,10 @@ import java.util.HashMap;
  *         Contact by: vlad@spreys.com
  */
 public class ApiWrapper {
-    //TODO add caching logic
     private final static String BASE_API_URL = "http://jsonplaceholder.typicode.com/";
     private final static String API_URL_PHOTOS = "photos/";
     private final static String API_URL_ALBUMS = "albums/";
     private final static String API_URL_USERS = "users/";
-
-    //TODO apply singleton design pattern
 
     //Caching
     static HashMap<Integer, Photo> photosHash = new HashMap<>();
@@ -91,9 +88,15 @@ public class ApiWrapper {
     }
 
     public Album getAlbum(int id) {
-        String url = BASE_API_URL + API_URL_ALBUMS + String.valueOf(id);
-        JSONObject jsonObject = getJsonObjectFromUrl(url);
-        return new Album(jsonObject);
+        Album album = albumHash.get(id);
+
+        if(album == null) {
+            String url = BASE_API_URL + API_URL_ALBUMS + String.valueOf(id);
+            JSONObject jsonObject = getJsonObjectFromUrl(url);
+            album = new Album(jsonObject);
+        }
+
+        return album;
     }
 
     public ArrayList<Album> getAlbums() {
@@ -114,9 +117,15 @@ public class ApiWrapper {
     }
 
     public User getUser(int id) {
-        String url = BASE_API_URL + API_URL_USERS + String.valueOf(id);
-        JSONObject jsonObject = getJsonObjectFromUrl(url);
-        return new User(jsonObject);
+        User user = userHash.get(id);
+
+        if(user == null) {
+            String url = BASE_API_URL + API_URL_USERS + String.valueOf(id);
+            JSONObject jsonObject = getJsonObjectFromUrl(url);
+            user = new User(jsonObject);
+        }
+
+        return user;
     }
 
     public ArrayList<User> getUsers() {
