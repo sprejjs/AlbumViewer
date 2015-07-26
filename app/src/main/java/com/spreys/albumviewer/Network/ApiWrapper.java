@@ -1,8 +1,6 @@
 package com.spreys.albumviewer.Network;
 
 import android.app.Activity;
-import android.os.Handler;
-import android.os.HandlerThread;
 import android.widget.TextView;
 
 import com.spreys.albumviewer.Model.Album;
