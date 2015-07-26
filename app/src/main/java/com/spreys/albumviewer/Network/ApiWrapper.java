@@ -4,11 +4,6 @@ import com.spreys.albumviewer.Model.Album;
 import com.spreys.albumviewer.Model.Photo;
 import com.spreys.albumviewer.Model.User;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.BasicHttpParams;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,8 +12,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -33,10 +26,13 @@ import java.util.HashMap;
  *         Contact by: vlad@spreys.com
  */
 public class ApiWrapper {
+    //TODO add caching logic
     private final static String BASE_API_URL = "http://jsonplaceholder.typicode.com/";
     private final static String API_URL_PHOTOS = "photos/";
     private final static String API_URL_ALBUMS = "albums/";
     private final static String API_URL_USERS = "users/";
+
+    //TODO apply singleton design pattern
 
     //Caching
     HashMap<Integer, Photo> photosHash = new HashMap<>();

@@ -1,9 +1,11 @@
-package com.spreys.albumviewer;
+package com.spreys.albumviewer.UI.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.spreys.albumviewer.R;
 
 public class AlbumsActivity extends AppCompatActivity {
 
