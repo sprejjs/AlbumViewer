@@ -1,5 +1,6 @@
 package com.spreys.albumviewer.UI.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.spreys.albumviewer.Model.Album;
+import com.spreys.albumviewer.Network.ApiWrapper;
 import com.spreys.albumviewer.R;
 
 import java.util.List;
@@ -23,10 +25,12 @@ import java.util.List;
  */
 public class AlbumsListAdapter extends ArrayAdapter<Album> {
     private List<Album> mAlbums;
+    private Activity mActivity;
 
-    public AlbumsListAdapter(Context context, List<Album> albums){
-        super(context, 0, albums);
+    public AlbumsListAdapter(Activity activity, List<Album> albums){
+        super(activity, 0, albums);
         mAlbums = albums;
+        mActivity = activity;
     }
 
     @Override
@@ -47,8 +51,8 @@ public class AlbumsListAdapter extends ArrayAdapter<Album> {
         //Fill up the data
         Album album = mAlbums.get(position);
         viewHolder.item_title.setText(album.getTitle());
-        //TODO replace id with a username
-        viewHolder.item_username.setText(String.valueOf(album.getId()));
+        ApiWrapper apiWrapper = new ApiWrapper();
+        apiWrapper.placeUserNameIntoTextView(mActivity, album.getUserId(), viewHolder.item_username);
 
         return convertView;
     }

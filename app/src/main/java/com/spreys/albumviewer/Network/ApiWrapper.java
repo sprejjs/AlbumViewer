@@ -1,5 +1,10 @@
 package com.spreys.albumviewer.Network;
 
+import android.app.Activity;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.widget.TextView;
+
 import com.spreys.albumviewer.Model.Album;
 import com.spreys.albumviewer.Model.Photo;
 import com.spreys.albumviewer.Model.User;
@@ -143,6 +148,31 @@ public class ApiWrapper {
         }
 
         return users;
+    }
+
+    public void placeUserNameIntoTextView(final Activity activity, final int userId, final TextView textView) {
+        User user = userHash.get(userId);
+
+        if (user == null) {
+            //Clear the re-used text
+            textView.setText("");
+            new Thread(new Runnable() {
+                public void run() {
+                    final User user = getUser(userId);
+                    userHash.put(user.getId(), user);
+
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            textView.setText(user.getName());
+                        }
+                    });
+                }
+            }).start();
+        } else {
+            textView.setText(user.getName());
+        }
+
     }
 
     private JSONArray getJsonArrayFromUrl(String url) {
