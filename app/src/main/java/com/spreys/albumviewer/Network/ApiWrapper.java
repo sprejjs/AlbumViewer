@@ -62,6 +62,23 @@ public class ApiWrapper {
         return photos;
     }
 
+    public ArrayList<Photo> getPhotos(int albumId) {
+        String url = BASE_API_URL + API_URL_PHOTOS + "?albumId=" + String.valueOf(albumId);
+        JSONArray jsonArray = getJsonArrayFromUrl(url);
+
+        ArrayList<Photo> photos = new ArrayList<>();
+        try {
+            for (int i = 0; i<jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                photos.add(new Photo(jsonObject));
+            }
+        } catch (JSONException | NullPointerException e) {
+            e.printStackTrace();
+        }
+
+        return photos;
+    }
+
     public Album getAlbum(int id) {
         String url = BASE_API_URL + API_URL_ALBUMS + String.valueOf(id);
         JSONObject jsonObject = getJsonObjectFromUrl(url);

@@ -68,4 +68,10 @@ public class TestNetworkingCalls extends AndroidTestCase {
         List<Photo> photos = apiWrapper.getPhotos();
         assertEquals(photos.size(), 5000);
     }
+
+    public void test_getPhotosForAlbum() {
+        ApiWrapper apiWrapper = new ApiWrapper();
+        List<Photo> photos = apiWrapper.getPhotos(5);
+        assertEquals(50, photos.size());
+    }
 }
