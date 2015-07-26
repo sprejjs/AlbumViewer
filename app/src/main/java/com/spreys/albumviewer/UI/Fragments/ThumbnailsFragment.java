@@ -1,12 +1,14 @@
 package com.spreys.albumviewer.UI.Fragments;
 
 
+import android.app.DialogFragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.spreys.albumviewer.Model.Photo;
@@ -36,6 +38,20 @@ public class ThumbnailsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_thumbnails, container, false);
+        ((GridView)view.findViewById(R.id.fragment_thumbnails_grid_view))
+                .setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        ImageDetailsFragment fragment = new ImageDetailsFragment();
+
+                        Bundle args = new Bundle();
+                        args.putInt(ThumbnailsActivity.KEY_PHOTO_ID, mPhotos.get(position).getId());
+
+                        fragment.setArguments(args);
+                        fragment.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
+                        fragment.show(getActivity().getSupportFragmentManager(), null);
+                    }
+                });
         return view;
     }
 

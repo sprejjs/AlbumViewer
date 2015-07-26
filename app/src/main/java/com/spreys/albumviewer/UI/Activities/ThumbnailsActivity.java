@@ -16,6 +16,7 @@ import com.spreys.albumviewer.UI.Fragments.ThumbnailsFragment;
  */
 public class ThumbnailsActivity extends AppCompatActivity {
     public static final String KEY_ALBUM_ID = "key_album_id";
+    public static final String KEY_PHOTO_ID = "key_image_id";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -35,14 +35,20 @@ public class ApiWrapper {
     //TODO apply singleton design pattern
 
     //Caching
-    HashMap<Integer, Photo> photosHash = new HashMap<>();
-    HashMap<Integer, Album> albumHash = new HashMap<>();
-    HashMap<Integer, User> userHash = new HashMap<>();
+    static HashMap<Integer, Photo> photosHash = new HashMap<>();
+    static HashMap<Integer, Album> albumHash = new HashMap<>();
+    static HashMap<Integer, User> userHash = new HashMap<>();
 
     public Photo getPhoto(int id) {
-        String url = BASE_API_URL + API_URL_PHOTOS + String.valueOf(id);
-        JSONObject jsonObject = getJsonObjectFromUrl(url);
-        return new Photo(jsonObject);
+        Photo photo = photosHash.get(id);
+
+        if(photo == null) {
+            String url = BASE_API_URL + API_URL_PHOTOS + String.valueOf(id);
+            JSONObject jsonObject = getJsonObjectFromUrl(url);
+            photo = new Photo(jsonObject);
+        }
+
+        return photo;
     }
 
     public ArrayList<Photo> getPhotos() {
@@ -53,7 +59,10 @@ public class ApiWrapper {
         try {
             for (int i = 0; i<jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                photos.add(new Photo(jsonObject));
+
+                Photo photo = new Photo(jsonObject);
+                photosHash.put(photo.getId(), photo);
+                photos.add(photo);
             }
         } catch (JSONException | NullPointerException e) {
             e.printStackTrace();
@@ -70,7 +79,9 @@ public class ApiWrapper {
         try {
             for (int i = 0; i<jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                photos.add(new Photo(jsonObject));
+                Photo photo = new Photo(jsonObject);
+                photosHash.put(photo.getId(), photo);
+                photos.add(photo);
             }
         } catch (JSONException | NullPointerException e) {
             e.printStackTrace();
